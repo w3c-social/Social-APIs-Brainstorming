@@ -1,0 +1,116 @@
+[19:24:07] <tsyesika> https://github.com/w3c-social
+[19:26:01] <tsyesika> https://github.com/w3c-social/Social-APIs-Brainstorming
+[19:26:20] <aaronpk> https://github.com/w3c-social/Social-APIs-Brainstorming/blob/master/README.md
+[19:37:57] <aaronpk> tsyesika: rhiaro: http://aaronparecki.com/uploads/whiteboard-20150505-161540.jpg
+[19:48:24] <rhiaro> implementations of pump.io could have any number of streams. Could aggregate stream under another stream, but they're all segemented
+[19:49:39] <rhiaro> aaronpk: good to have separate streams, and not everything on homepage; someone should be able to follow whichever subsets they want
+[19:50:00] <rhiaro> ... not sure how pump enables this, micropub doesn't even have a concept of what you're posting to
+[19:50:58] <rhiaro> tsyesika: activitypump allows you to create more streams, but doesn't solve sorting/querying by something arbitrary
+[19:51:20] <rhiaro> aaronpk: when I follow somebody what am I following?
+[19:51:29] <rhiaro> tsyesika: you're following what is explicitly posted to their followers
+[19:52:54] <rhiaro> ... what the receiving server does with it could vary
+[19:53:11] <rhiaro> aaronpk: is it possible to make a post that is not targeting your outbox but is public
+[19:53:22] <rhiaro> tsyesika: no, always post to outbox
+[19:54:00] <rhiaro> ... if you send it to public, it's federated to your followers, but is visible to everyone
+[19:54:15] <rhiaro> ... if you post to nobody, assumes followers
+[19:55:05] <rhiaro> aaronpk: have homepage feed that shows mostly just notes and photos, would probably add bookmarks and favourites, but not metrics
+[19:55:09] <rhiaro> ... don't want to flood
+[19:55:17] <rhiaro> ... but I do want them to be public
+[19:55:27] <rhiaro> ... like two different public feeds
+[19:55:39] <rhiaro> ... how does AP handle that?
+[19:56:06] <rhiaro> tsyesika: not really a use case in the spec right now. Could do it by creating another stream like 'metrics' that you would post to, and my server wouldn't be federating those, not really in the spec, spec says goes to outbox
+[19:56:41] <rhiaro> ... I would advocate if you post somethign to public it doesn't automatically go to followers, you have to explicitly specify followers
+[19:57:42] <rhiaro> Users should be able to specify streams they can post to
+[19:57:46] <rhiaro> Not the implementation
+[19:58:04] <rhiaro> And maybe audience targeting could be attached to streams like that
+[20:02:08] <rhiaro> aaronpk: micropub to create objects with properties its simple - every form field is a property on the object
+[20:02:18] <rhiaro> ... starts to get weird for updates, with control properties
+[20:02:38] <rhiaro> ... so was thinking what it would look like if I made my ideal syntax for this in json
+[20:02:51] <rhiaro> ... I think it's going to look a lot like updating a note activitypump
+[20:03:29] <rhiaro> ... The json syntax for updating an deleting does make a lot of sense in AP, starts to get messy in micropub
+[20:03:36] <rhiaro> ... But simplicity of create in micropub is critical
+[20:04:15] <rhiaro> tsyesika: do you think burden of create in AP is significantly higher that it evens out? If you're adding hacks on top of form encoding does there become a point where it doesn't make sense to use
+[20:05:06] <rhiaro> aaronpk: this weekend [at IWC in Dusseldorf], load sof people who never heard if indieweb before but had some sort of website, were able to create a new endpoint that understood create posts from micropub, and were able to use posting apps, within 5 hours
+[20:05:33] <rhiaro> ... not complete, no updates or deletes, but could get creates working very quickly. Overhead of understanding an dimplementing low
+[20:06:16] <rhiaro> ... I wonder if there's a way to trim requirements for creating in AP so you can just do a post of key value pairs
+[20:06:30] <rhiaro> ... without worrying about outbox or audience targeting, so create is just a post request with object you're creating
+[20:07:00] <rhiaro> tsyesika: pretty acceptable. You could just have it in the spec that if an activity sin't submitted but a valid object is, you can assume that the user wants to create the object and the activity is a side effect
+[20:12:28] <rhiaro> tsyesika: one of the strengths of activities is it's a log of everything you've done
+[20:12:56] <rhiaro> ... undo should create a new activity, not delete the original
+[20:13:15] <rhiaro> ... AS is as much a log language as a command language
+[20:13:34] <rhiaro> aaronpk: how does AP do partial updates? eg. add a tag
+[20:14:21] <rhiaro> tsyesika: you'd need to pass whole updated array
+[20:14:29] <rhiaro> aaronpk: no partial manipulation of arrays
+[20:15:01] <rhiaro> ... In micropub you can do this with arrays
+[20:15:41] <aaronpk> mp-remove[category]=foo
+[20:15:46] <aaronpk> removes the "foo" value from the category array
+[20:17:17] <rhiaro> ... for a collection there's a way to add and remove specific items
+[20:17:56] <rhiaro> tsyesika: we don't really have the concept of tags (don't know why). Could be a collection with and ID and do an add or remove verb to the object
+[20:18:29] <aaronpk> http://jasnell.github.io/w3c-socialwg-activitystreams/activitystreams2.html#microsyntaxes
+[20:20:46] <rhiaro> Just saying aaron's tag collections alreayd have urls, /tag/whatever
+[20:21:26] <rhiaro> tsyesika: simpler conceptually to submit the entire object you want it to be
+[20:21:40] <rhiaro> aaronpk: not practical, bigger burden on client, potential for conflicts
+[20:22:28] <rhiaro> aaronpk: writing in a different way that is equivalent but doesn't have mp- prefixes
+[20:23:01] <aaronpk> https://github.com/aaronpk/Social-APIs-Brainstorming/blob/master/README.md#example-of-a-micropub-request-posted-as-json
+[20:25:17] <rhiaro> tsyesika: things we really need to get done: vocabs
+[20:25:46] <rhiaro> ... not loving idea of translating between them
+[20:25:54] <rhiaro> aaronpk: yeah
+[20:26:19] <rhiaro> ... maybe we need to look at minimal examples for objects with title, content, tags. Figure out what are the things that are common/different
+[20:26:28] <rhiaro> ... in microformats, not a lot of object types in the spec
+[20:26:38] <rhiaro> ... most of my stuff is experimental vocabulary
+[20:26:49] <rhiaro> ... mf vocab is developed from examples in the wild
+[20:26:59] <rhiaro> ... well established now are h-entry and h-card
+[20:27:08] <rhiaro> ... h-card based on a lot of research going back a long time
+[20:27:28] <rhiaro> ... h-entry similarly based on atom. But nothing else
+[20:27:48] <rhiaro> ... made up recently idea of h-entry that contains like-of, repost-of, in-reply-to properties. Well established, but similar objects
+[20:28:01] <rhiaro> ... Other kinds of things that AS does, there isn't a version in mf even being experimented with
+[20:28:13] <rhiaro> tsyesika: existing stuff that can't change - where does that put us?
+[20:29:00] <rhiaro> aaronpk: actor vs author, displayName vs name
+[20:29:12] <rhiaro> ... no property for url in json-ld version, ti's @id
+[20:29:33] <rhiaro> microformats has uid and url
+[20:31:04] <rhiaro> aaronpk: microformats name property is mean to be a display name
+[20:31:38] <rhiaro> ... there are different properties for given name, additional name, and family name, and nickname
+[20:31:41] <rhiaro> ... in h-card
+[20:32:12] <rhiaro> ... in general in mf, name is always meant to be displayable if you don't knwo what the object is otherwise. A fallback.
+[20:33:41] <rhiaro> tesyesika: AP is going to change things anyway, so chainging a couple of property names wouldn't be a big deal. But I'm not editing vocab, so don't know how receptive group/editor would be
+[20:33:48] <rhiaro> aaronpk: we should note specific examples in this document
+[20:35:14] <rhiaro> tsyesika: how receptive would indieweb people be to supporting json in addition to form encoding
+[20:35:26] <rhiaro> aaronpk: wouldn't waant to make a json format that is analagous to form encoding
+[20:35:34] <rhiaro> ... means there are two separate code paths
+[20:35:56] <rhiaro> ... there is something nice about the way this looks in json
+[20:36:20] <rhiaro> tsyesika: sticking point when we need bridges
+[20:38:07] <rhiaro> aaronpk: need to figure out what people would have to go through to send json instead of form encoding
+[20:38:42] <rhiaro> ... always going to be the first hurdle of how you get the values out of the post request
+[20:39:01] <rhiaro> tsyesika: do you see that changing? because the web increasingly json apis
+[20:39:04] <rhiaro> aaronpk: that was xml ten years ago
+[20:39:11] <rhiaro> Can we use RDF then?! :D
+[20:39:51] <rhiaro> aaronpk: if browsers do build in support for json forms that would change a lot of things
+[20:40:13] <rhiaro> ... arguably also more json apis than there ever were xml apis
+[20:40:29] <rhiaro> tsyesika: in python it's easier to work with json
+[20:40:37] <rhiaro> ... but with django etc not as easy
+[20:40:49] <rhiaro> yeah web frameworks make it really easy to work with web forms
+[20:41:03] <rhiaro> tsyesika: all web tools have been built to work with html forms
+[20:41:13] <rhiaro> aaronpk: yes, but also recognise some things don't map to that format very well
+[20:41:32] <aaronpk> http://stackoverflow.com/questions/1208067/wheres-my-json-data-in-my-incoming-django-request
+[20:41:35] <aaronpk> http://stackoverflow.com/questions/4360008/how-to-parse-json-of-an-incoming-post-request-in-rails
+[20:41:40] <aaronpk> http://stackoverflow.com/questions/9427052/handling-json-post-request-in-php
+[20:41:49] <aaronpk> http://stackoverflow.com/questions/27190447/pass-json-to-http-post-request
+[20:42:53] <rhiaro> Idea: forms for simple create, json for more complicated updates and deletes
+[20:43:09] <rhiaro> aaronpk: people would probably see that makes more sense in json, so far most indieweb people only implement micropub create
+[20:43:17] <rhiaro> ... we'd need feedback
+[20:43:33] <rhiaro> ... Other thing is syndicating. Don't knwo how many people have implmented
+[20:43:52] <rhiaro> tsyesika: in pump.io we do it via bridges, not server side support
+[20:44:03] <aaronpk> http://stackoverflow.com/questions/10005939/how-to-consume-json-post-data-in-an-express-application
+[20:44:29] <rhiaro> ... audience targeting to specify to bridge
+[20:46:46] <rhiaro> aaronpk: syndication in blog days. Either add to your own reader, or someone adds their blog to a planet aggregator which becomes a community
+[20:47:07] <rhiaro> ... Imagine being able to selectively push stuff to these aggregators
+[20:47:21] <rhiaro> tsyesika: understand use of syndication, would use. Could be handled well through bridges
+[20:47:26] <rhiaro> aaronpk: yeah, interesting way to handle it
+[20:51:20] <rhiaro> Next steps: identify that vocab is an issue, between AS2 and mf2, be good to talk to james directly about resolving them
+[20:52:11] <rhiaro> TODO: get a list of vocab that microformats can't change. (None in AP)
+[20:52:38] <rhiaro> TODO: Add to readme things that AP wants that mp does
+[20:53:12] <rhiaro> TODO: minimum post request to create activity, assuming activity created as a side effect
+[20:53:30] <rhiaro> ... with everything that is not necessary
+[20:56:18] <rhiaro> Future meetings: Friday at same time
+[20:56:27] <tsyesika> paroneayea: We've scheduled another meeting same time next friday
+[20:56:37] <rhiaro> which for my benefit is 1800 BST
