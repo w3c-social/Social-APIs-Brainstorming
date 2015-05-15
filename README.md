@@ -13,6 +13,57 @@
 
 ### Example of a Micropub request posted as JSON
 
+Updating a post (implied action:update)
+
+```json
+{
+  "url": "http://example.com/post/1",
+  "object": {
+    "content": "hello moon"
+  }
+}
+```
+
+Adding a value to an array (implied action:update)
+
+```json
+{
+  "url": "http://example.com/post/1",
+  "add": {
+    "category": ["indieweb"]
+  }
+}
+```
+
+Removing a value from an array (implied action:update)
+
+```json
+{
+  "url": "http://example.com/post/1",
+  "remove": {
+    "category": ["indieweb"]
+  }
+}
+```
+
+Removing a value (or an array) (implied action:update)
+
+```json
+{
+  "url": "http://example.com/post/1",
+  "remove": ["category"]
+}
+```
+
+Deleting a post:
+
+```json
+{
+  "url": "http://example.com/post/1",
+  "action": "delete"
+}
+```
+
 
 ## Things that Micropub does that ActivityPump wants
 
