@@ -91,8 +91,27 @@ Deleting a post:
 
 
 ### Minimum viable create request
-What does a minimum create post look like, with as many values implied as possible.
 
+The minimum allowed in the spec is:
+```json
+{
+    "@Type": "Post",
+    "object": {
+        "content": "Hello world!",
+        "@Type": "Note"
+    }
+}
+```
+
+If we had it so that an activity could be created as a side effect:
+```json
+{
+    "content": "Hello world!",
+    "@Type": "Note"
+}
+```
+This as a side-effect would not only create the note but also create an
+activity.
 
 ## Notes
 * In ActivityPump, following someone results in seeing everything they post directed to their followers
