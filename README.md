@@ -89,6 +89,9 @@ Deleting a post:
 
 ### Things that Micropub does that ActivityPump wants
 
+- Ability to get source of post (e.g. original markdown posted in)
+- Uploading multiple files
+- Split up specification into more manageable chunks and not be one huge daunting spec
 
 ### Minimum viable create request
 
@@ -115,5 +118,5 @@ activity.
 
 ## Notes
 * In ActivityPump, following someone results in seeing everything they post directed to their followers
-* "quiet posting" in AP doesn't exist, e.g. you can't make something public and *not* have it pushed to everyone
+* "quiet posting" in AP doesn't exist, e.g. you can't make something public and *not* have it pushed to everyone- 
 
