@@ -90,6 +90,9 @@ Deleting a post:
 ### Things that Micropub does that ActivityPump wants
 
 
+### Minimum viable create request
+What does a minimum create post look like, with as many values implied as possible.
+
 
 ## Notes
 * In ActivityPump, following someone results in seeing everything they post directed to their followers
