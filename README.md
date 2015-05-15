@@ -13,6 +13,16 @@
 
 ### Example of a Micropub request posted as JSON
 
+Creating a post (implied action:create because no URL is given)
+```json
+{
+  "object": {
+    "content": "hello moon",
+    "category": ["indieweb"]
+  }
+}
+```
+
 Updating a post (implied action:update)
 
 ```json
