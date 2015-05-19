@@ -98,10 +98,11 @@ Deleting a post:
 The minimum allowed in the spec is:
 ```json
 {
-    "@Type": "Post",
+    "@context": "http://www.w3.org/ns/activitystreams",
+    "@type": "Post",
     "object": {
-        "content": "Hello world!",
-        "@Type": "Note"
+        "@type": "Note",
+        "content": "Hello world!"
     }
 }
 ```
@@ -109,8 +110,9 @@ The minimum allowed in the spec is:
 If we had it so that an activity could be created as a side effect:
 ```json
 {
-    "content": "Hello world!",
-    "@Type": "Note"
+    "@context": "http://www.w3.org/ns/activitystreams",
+    "@type": "Note",
+    "content": "Hello world!"
 }
 ```
 This as a side-effect would not only create the note but also create an
