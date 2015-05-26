@@ -8,8 +8,8 @@
 
 ## Issues
 
-* Vocabulary - `h-entry` and `h-card` vs ActivityStreams 2.0 vocab
-
+* Vocabulary - `h-entry` and `h-card` vs ActivityStreams 2.0 content types
+* `author` in microformats vs `actor` and `attributedTo` in AS
 
 ## Micropub
 
@@ -20,9 +20,11 @@
 
 ### Ideas
 * Generating "activity" posts after manipulating content posts
-
+* Or attaching all metadata to the 'object' and sending pure objects (that [still look like activities](http://rhiaro.co.uk/2015/05/micropubbing-with)) for publishing and distribution as JSON.
 
 ### Example of a Micropub request posted as JSON
+
+** Expansion upon these at [http://rhiaro.co.uk/2015/05/micropubbing-with](http://rhiaro.co.uk/2015/05/micropubbing-with) **
 
 Creating a post (implied action:create because no URL is given)
 ```json
