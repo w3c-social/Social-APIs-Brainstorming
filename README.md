@@ -6,6 +6,15 @@
 * Bearer tokens for authentication
 * Leave obtaining the bearer token out of the spec, since there are already several RFCs for ways to obtain bearer tokens
 
+### Endpoints
+
+Similar but different:
+
+|              | Publish content | Receive content/notifications |
+| ------------ | ------- | ------- |
+| ActivityPump | post to /outbox | get from /inbox |
+| Micropub     | discover micropub endpoint (rel="micropub") and post to it | receive webmention at discoverable rel="webmention" endpoint; how to handle not spec'd |
+
 ## Issues
 
 * Vocabulary - `h-entry` and `h-card` vs ActivityStreams 2.0 content types
