@@ -10,6 +10,7 @@
 
 * Vocabulary - `h-entry` and `h-card` vs ActivityStreams 2.0 content types
 * `author` in microformats vs `actor` and `attributedTo` in AS
+* `url` and `uid` in microformats vs `url`, `@id` and `href` in AS
 
 ## Micropub
 
