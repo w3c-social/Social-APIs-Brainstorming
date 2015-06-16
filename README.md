@@ -32,70 +32,128 @@ Similar but different:
 * Generating "activity" posts after manipulating content posts
 * Or attaching all metadata to the 'object' and sending pure objects (that [still look like activities](http://rhiaro.co.uk/2015/05/micropubbing-with)) for publishing and distribution as JSON.
 
-### Example of a Micropub request posted as JSON
+### Example of Micropub requests posted as JSON
 
 ** Expansion upon these at [http://rhiaro.co.uk/2015/05/micropubbing-with](http://rhiaro.co.uk/2015/05/micropubbing-with) **
 
-Creating a post (implied action:create because no URL is given)
+#### Creating a Post
+
+Creating a post, specifying properties from the microformats2 vocab. The type and properties map to the output of the [Microformats 2 parsed result](http://microformats.org/wiki/microformats2-parsing).
+
+Form-encoded requests have a property `h=*` which specifies the type of object being created. All other properties are considered properties of the object being created.
+
+```
+h=entry&
+content=hello+moon&
+category[]=indieweb&
+category[]=micropub
+```
+
+When submitting a request in JSON format, simply send the JSON-encoded representation of the Microformats2 object you are creating. Properties such as author and publish date are set by the Micropub endpoint if not specified in the request.
+
 ```json
 {
-  "object": {
-    "content": "hello moon",
-    "category": ["indieweb"]
+  "type": ["h-entry"],
+  "properties": {
+    "content": ["hello moon"],
+    "category": ["indieweb","micropub"]
   }
 }
 ```
 
-Updating a post (implied action:update)
+#### Editing a post
+
+Because of the nuances of modifying specific values in properties, these requests do not have a "simple" form-encoded representation, and must use nested properties with array notation. These form-encoded requests are the same structure as the JSON version, but serialized as form-encoded instead.
+
+##### Replacing all values of a property
+
+Updating a specific property of a post, replacing all values of the property. If the property does not exist already, it is created.
+
+```
+edit-of=http://example.com/post/1
+&update[properties][content]=hello+moon
+```
 
 ```json
 {
-  "url": "http://example.com/post/1",
-  "object": {
-    "content": "hello moon"
+  "edit-of": "http://example.com/post/1",
+  "update": {
+    "properties": {
+      "content": ["hello moon"]
+    }
   }
 }
 ```
 
-Adding a value to an array (implied action:update)
+##### Adding a value to a property
+
+Adding a value. If there are any existing values for this property, they are not changed, the new values are added. If the property does not exist already, it is created.
+
+```
+edit-of=http://example.com/post/1
+&add[properties][category][]=indieweb
+&add[properties][category][]=foo
+```
 
 ```json
 {
-  "url": "http://example.com/post/1",
+  "edit-of": "http://example.com/post/1",
   "add": {
-    "category": ["indieweb"]
+    "properties": {
+      "category": ["indieweb","foo"]
+    }
   }
 }
 ```
 
-Removing a value from an array (implied action:update)
+##### Removing a value from a property
+
+Removing a value. This removes just the "indieweb" value from the "category" property, leaving all other values. If no values remain, the property is removed.
+
+```
+edit-of=http://example.com/post/1
+&remove[properties][category]=indieweb
+```
 
 ```json
 {
-  "url": "http://example.com/post/1",
-  "remove": {
-    "category": ["indieweb"]
+  "edit-of": "http://example.com/post/1",
+  "delete": {
+    "properties": {
+      "category": ["indieweb"]
+    }
   }
 }
 ```
 
-Removing a value (or an array) (implied action:update)
+##### Removing a property
+
+```
+edit-of=http://example.com/post/1
+&remove[properties]=indieweb
+```
 
 ```json
 {
-  "url": "http://example.com/post/1",
-  "remove": ["category"]
+  "edit-of": "http://example.com/post/1",
+  "delete": {
+    "properties": ["category"]
+  }
 }
 ```
 
-Deleting a post:
+#### Deleting a post
+
+```
+delete-of=http://example.com/post/1
+```
 
 ```json
 {
-  "url": "http://example.com/post/1",
-  "action": "delete"
+  "delete-of": "http://example.com/post/1"
 }
 ```
+
 
 ## ActivityPump
 
