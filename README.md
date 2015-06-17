@@ -169,7 +169,7 @@ The minimum allowed in the spec is:
 ```json
 {
     "@context": "http://www.w3.org/ns/activitystreams",
-    "@type": "Post",
+    "@type": "Create",
     "object": {
         "@type": "Note",
         "content": "Hello world!"
