@@ -58,12 +58,12 @@ Publish a feed/stream that others can read (subject to permissions).
 
 ### Creating content
 
-`POST` to an endpoint that can suitable handle the data.
+`POST` to an endpoint that can suitably handle the data.
 
 |              | ActivityPump | Micropub |
 | ------------ | --------------------------------------------- | -------- |
 | **Endpoint** | discoverable outbox                           | `rel="micropub"` |
-| **Data**     | `{`                                           | Form-encoding: |
+| **Create**   | `{`                                           | Form-encoding: |
 |              | ` "@type": "Create",`                         | `h=entry&` |
 |              | ` "published": "2015-05-15T13:06:00+02:00",`  | `content=hello+moon&` |
 |              | ` "actor": "http://rhiaro.co.uk/about#me",`   | `category[]=indieweb&` |
@@ -78,11 +78,21 @@ Publish a feed/stream that others can read (subject to permissions).
 |              |                                               | `    "category": ["indieweb","micropub"]` |
 |              |                                               | `  }` |
 |              |                                               | `}` |
+| **Update**   |                                               | |
+| **Delete**   |                                               | |
 
 ## Subscribing
+
+* follow activity
+* PuSH
 
 ## Propagating
 
 ### Propagating content
 
+* AP section 8, posting to inbox
+* webmentions
+
 ### Updating the social graph
+
+side effects, adding to collections etc
