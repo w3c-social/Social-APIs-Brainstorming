@@ -81,6 +81,7 @@ Publish a feed/stream that others can read (subject to permissions).
 | **Update**   |                                               | |
 | **Delete**   |                                               | |
 
+
 ## Subscribing
 
 * follow activity
