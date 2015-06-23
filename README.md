@@ -10,10 +10,11 @@
 
 Similar but different:
 
-|              | Publish content | Receive content/notifications |
-| ------------ | ------- | ------- |
-| ActivityPump | post to /outbox | get from /inbox |
-| Micropub     | discover micropub endpoint (rel="micropub") and post to it | receive webmention at discoverable rel="webmention" endpoint; how to handle not spec'd |
+|              | Read content | Publish content | Receive notifications |
+| ------------ | ------------ | ------- | ------- |
+| ActivityPump | GET /outbox | POST to /outbox | GET /inbox |
+| Micropub     | n/a; GET homepage (or feed URL) assumed to be marked up with microformats2 | discover micropub endpoint (rel="micropub") and POST to it | receive webmention at discoverable rel="webmention" endpoint; how to handle not spec'd |
+| SoLiD        | GET container or resource URI | POST to URI of a `Container` | ? |
 
 ## Issues
 
