@@ -79,6 +79,15 @@ Publish a feed/stream that others can read (subject to permissions).
 |              |                                               | `  }` |
 |              |                                               | `}` |
 
+test trying to figure out codeblocks in table
+
+|   |                |   |   |   |
+|---|----------------|---|---|---|
+|   | ``` asdf } ``` |   |   |   |
+|   |                |   |   |   |
+|   |                |   |   |   |
+
+
 ## Subscribing
 
 ## Propagating
