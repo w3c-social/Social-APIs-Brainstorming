@@ -1,10 +1,12 @@
-# Micropump
+# Social API
+
+Code name *micropump*.
 
 **Disclaimer:** Just kidding about 'micropump', not really trying for a frankenspec with with a new name. This is a strawman skeleton document for what the Social (and Federation) API could look like, taking bits from [ActivityPump](http://w3c-social.github.io/activitypump/) and the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub)) and [SoLiD](http://linkeddata.github.io/SoLiD/) *as they currently stand*; all are subject to ongoing development. [PRs and issues ~~welcome~~ ~~encouraged~~ necessary](http://www.ludumdare.com/compo/wp-content/uploads/2013/04/i-have-no-idea-what-im-doing-dog.jpg).
 
 ## Status of this document
 
-Braindump with aspirations of being a spec one day
+Very early beginnings of a spec outline.
 
 ## Overview
 
@@ -44,11 +46,11 @@ Not to be over-thought. Terminology:
 
 | ActivityPump | Micropub | SoLiD |
 | ------------ | -------- | ----- |
-| `Actor` from ActivityStreams2.0 | `author` from microformats2 | `foaf:Agent` maybe? |
+| `Actor` from ActivityStreams2.0 | `author` from microformats2 | Any suitable ontology term, eg. `foaf:Agent` |
 
 Engage debate: relationship between people (personas, no IRL requirement; or orgs or groups or whatever), profiles (documents about people) and accounts.
 
-We are *not* trying to re-standardize identity on the web, but we need to be clear about our core assumptions.
+We are *not* trying to standardize identity on the web, but we need to be clear about our core assumptions.
 
 ## Publishing
 
