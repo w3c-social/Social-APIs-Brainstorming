@@ -5,7 +5,7 @@ This repo is a collection of resources related to ongoing development of Social 
 ## Table of contents
 
 * [Brainstorming: comparison of Micropub, ActivityPump and SoLiD](#brainstorming) (this document).
-* [Social API draft](https://github.com/rhiaro/Social-APIs-Brainstorming/blob/master/socialapi.md)
+* [Social API draft](https://github.com/w3c-social/Social-APIs-Brainstorming/blob/master/socialapi.md)
 
 # Brainstorming
 
