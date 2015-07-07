@@ -1,4 +1,13 @@
-# Social APIs Brainstorming
+# W3C Social Web WG Brainstorming
+
+This repo is a collection of resources related to ongoing development of Social and Federation API specificaitons, according to the [SocialWG charter](http://www.w3.org/2013/socialweb/social-wg-charter).
+
+## Table of contents
+
+* [Brainstorming: comparison of Micropub, ActivityPump and SoLiD](#brainstorming) (this document).
+* [Social API draft](https://github.com/rhiaro/Social-APIs-Brainstorming/blob/master/socialapi.md)
+
+# Brainstorming
 
 ## Common Ground
 
