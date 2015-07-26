@@ -2,7 +2,7 @@
 
 Code name *micropump*.
 
-**Disclaimer:** Just kidding about 'micropump', not really trying for a frankenspec with with a new name. This is a strawman skeleton document for what the Social (and Federation) API could look like, taking bits from [ActivityPump](http://w3c-social.github.io/activitypump/) and the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub)) and [SoLiD](http://linkeddata.github.io/SoLiD/) *as they currently stand*; all are subject to ongoing development. [PRs and issues ~~welcome~~ ~~encouraged~~ necessary](http://www.ludumdare.com/compo/wp-content/uploads/2013/04/i-have-no-idea-what-im-doing-dog.jpg).
+**Disclaimer:** Just kidding about 'micropump', not really trying for a frankenspec with a new name. This is a strawman skeleton document for what the Social (and Federation) API could look like, taking bits from [ActivityPump](http://w3c-social.github.io/activitypump/) and the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub)) and [SoLiD](http://linkeddata.github.io/SoLiD/) *as they currently stand*; all are subject to ongoing development. [PRs and issues ~~welcome~~ ~~encouraged~~ necessary](http://www.ludumdare.com/compo/wp-content/uploads/2013/04/i-have-no-idea-what-im-doing-dog.jpg).
 
 ## Status of this document
 
